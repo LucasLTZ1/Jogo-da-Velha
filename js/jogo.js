@@ -33,14 +33,13 @@ $(document).ready( function(){
             return false;
         }
 
+        $('#nome-jogador-1').html($('#nomejogador1').val());
+
+        $('#nome-jogador-2').html($('#nomejogador2').val());
+
         $('#inicio').hide();
         $('#jogo').show();
 
-    });
-
-    $('.jogada').click( function(){
-
-        alert('teste do click');
     });
 
     $('.jogada').click( function(){
@@ -74,7 +73,91 @@ $(document).ready( function(){
 
         $('#'+id).css('background-image', icone);
 
-        alert(id);
-    } 
+        var linha_coluna = id.split('-');
 
+        matriz_jogo[linha_coluna[0]][linha_coluna[1]] = ponto;
+
+        verifica_pontuacao();
+        }
+
+        function verifica_pontuacao(){
+            var pontos = 0;
+            for(var i=1; i<=3; i++){
+                pontos = pontos + matriz_jogo['a'][i];
+            }
+
+            ganhador(pontos);
+
+            pontos = 0;
+            for(var i=1; i<=3; i++){
+                pontos = pontos + matriz_jogo['b'][i];
+            }
+
+            ganhador(pontos);
+
+            pontos = 0;
+            for(var i=1; i<=3; i++){
+                pontos = pontos + matriz_jogo['c'][i];
+            }
+
+            ganhador(pontos);
+
+        for(var l = 1; l <=3; l++){
+
+            pontos = 0;
+
+            pontos += matriz_jogo['a'][l];
+
+            pontos += matriz_jogo['b'][l];
+
+            pontos += matriz_jogo['c'][l];
+
+        
+
+        ganhador(pontos);
+
+    }
+
+        pontos = 0;
+
+        pontos = matriz_jogo['a'][1] + matriz_jogo['b'][2] + matriz_jogo['c'][3];
+
+        ganhador(pontos);
+
+
+
+        pontos = 0;
+
+        pontos = matriz_jogo['a'][3] + matriz_jogo['b'][2] + matriz_jogo['c'][1];
+
+        ganhador(pontos);
+
+
+
+}
+        
+        function ganhador(pontos){
+            if(pontos == -3){
+
+                var jogador1 = $('#nomejodador1').val();
+
+                alert(jogador1 + 'é o VENCEDOR!');
+                
+                $('.jogada').off();
+
+            } else if(pontos == 3){
+                var jogador2 = $('#nomejogador2').val();
+
+                    alert(jogador2 + ' é o VENCEDOR!');
+
+                    $('.jogada').off();
+                
+            }
+
+            }
+             
 });
+
+
+
+
